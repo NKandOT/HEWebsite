@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HEWebsite.Data.Models
 {
-    public class ApplicationUser
+    public class ApplicationUser : IdentityUser
     {
         [PersonalData]
         [Column(TypeName = "nvarchar(100)")]
