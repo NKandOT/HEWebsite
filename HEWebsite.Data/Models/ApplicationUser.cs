@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HEWebsite.Data.Models
 {
@@ -20,5 +16,6 @@ namespace HEWebsite.Data.Models
         public int Rating { get; set; }
         public DateTime MemberSince { get; set; }
         public bool IsActive { get; set; }
+        public string UserImage { get; set; }
     }
 }

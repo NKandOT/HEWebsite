@@ -1,8 +1,6 @@
-﻿using HEWebsite.Models.Forum;
-
-namespace HEWebsite.Models.Post
+﻿namespace HEWebsite.Models.Reply
 {
-    public class PostListingModel
+    public class PostReplyModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -10,11 +8,10 @@ namespace HEWebsite.Models.Post
         public int AuthorRating { get; set; }
         public string AuthorId { get; set; }
         public string AutherImage { get; set; }
-        public string  DatePosted { get; set; }
+        public string DatePosted { get; set; }
 
-        public ForumListingModel Forum { get; set; }
+        public string ReplyContent { get; set; }
 
-        public int RepliesCount { get; set; }
-
+        public int PostId { get; set; }
     }
 }

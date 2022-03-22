@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HEWebsite.Data.Models
 {
@@ -11,6 +8,7 @@ namespace HEWebsite.Data.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string ForumImage { get; set; }
         public DateTime Created { get; set; }
         public virtual IEnumerable<Post> Posts { get; set; }
 

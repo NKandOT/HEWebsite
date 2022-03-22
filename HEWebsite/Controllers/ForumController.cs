@@ -3,7 +3,6 @@ using HEWebsite.Data.Models;
 using HEWebsite.Models.Forum;
 using HEWebsite.Models.Post;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Linq;
 
 namespace HEWebsite.Controllers
@@ -25,7 +24,8 @@ namespace HEWebsite.Controllers
                 .Select(forum => new ForumListingModel {
                     Id = forum.Id,
                     Title = forum.Title,
-                    Description = forum.Description
+                    Description = forum.Description,
+                    ForumImage = forum.ForumImage
                 });
             var model = new ForumIndexModel
             {
@@ -74,7 +74,7 @@ namespace HEWebsite.Controllers
                 Id = forum.Id,
                 Title = forum.Title,
                 Description = forum.Description,
-
+                ForumImage = forum.ForumImage,
             };
         }
     }

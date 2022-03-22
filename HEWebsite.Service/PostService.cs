@@ -1,10 +1,10 @@
 ﻿using HEWebsite.Data;
 using HEWebsite.Data.Interface;
 using HEWebsite.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HEWebsite.Service
@@ -43,9 +43,13 @@ namespace HEWebsite.Service
             throw new NotImplementedException();
         }
 
-        public IPost GetById(int Id)
+        public IPost GetById(int id)
         {
-            throw new NotImplementedException();
+            return (IPost)_context.Posts.Where(post => post.Id == id)
+                .Include(post => post.User)
+                .Include(post => post.Replies)
+                .Include(post => post.Forum)
+                .First();
         }
 
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)
