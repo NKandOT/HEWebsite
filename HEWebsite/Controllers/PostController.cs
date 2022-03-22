@@ -21,14 +21,14 @@ namespace HEWebsite.Controllers
         {
             var post = _postService.GetById(id);
 
-            var replies = BuildPostReplies(post.);
+            var replies = BuildPostReplies(post.Replies);
 
             var model = new PostIndexModel
             {
                 Id = post.Id,
                 Title = post.Title,
                 AuthorId = post.User.Id,
-                AuthorName = post.User.Username,
+                AuthorName = post.User.UserName,
                 AuthorImage = post.User.UserImage,
                 AuthorRating = post.User.Rating,
                 Created = post.Created,

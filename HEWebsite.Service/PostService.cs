@@ -43,9 +43,9 @@ namespace HEWebsite.Service
             throw new NotImplementedException();
         }
 
-        public IPost GetById(int id)
+        public Post GetById(int id)
         {
-            return (IPost)_context.Posts.Where(post => post.Id == id)
+            return _context.Posts.Where(post => post.Id == id)
                 .Include(post => post.User)
                 .Include(post => post.Replies)
                 .Include(post => post.Forum)

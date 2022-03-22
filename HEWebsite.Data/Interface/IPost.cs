@@ -6,7 +6,7 @@ namespace HEWebsite.Data.Interface
 {
     public interface IPost
     {
-        IPost GetById(int Id);
+        Post GetById(int Id);
         IEnumerable<Post> GetAll();
         IEnumerable<Post> GetFilteredPosts(string searchQuery);
         IEnumerable<Post> GetPostsByForum(int id);
