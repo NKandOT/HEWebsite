@@ -8,7 +8,7 @@
         public int AuthorRating { get; set; }
         public int AuthorId { get; set; }
         public string AutherImage { get; set; }
-        public string DatePosted { get; set; }
+        public string Created { get; set; }
 
         public string ReplyContent { get; set; }
 

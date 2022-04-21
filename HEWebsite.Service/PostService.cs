@@ -38,7 +38,7 @@ namespace HEWebsite.Service
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Post> GetAll()
+        public IEnumerable<Post> GetAll(int id)
         {
             throw new NotImplementedException();
         }
@@ -48,6 +48,7 @@ namespace HEWebsite.Service
             return _context.Posts.Where(post => post.Id == id)
                 .Include(post => post.User)
                 .Include(post => post.Replies)
+                    .ThenInclude(replies => replies.User)
                 .Include(post => post.Forum)
                 .First();
         }

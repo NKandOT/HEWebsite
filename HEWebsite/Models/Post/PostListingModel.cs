@@ -16,5 +16,7 @@ namespace HEWebsite.Models.Post
 
         public int RepliesCount { get; set; }
 
+        public int postId { get; set; }
+
     }
 }
