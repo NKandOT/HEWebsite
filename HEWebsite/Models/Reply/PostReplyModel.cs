@@ -6,9 +6,9 @@
         public string Title { get; set; }
         public string AuthorName { get; set; }
         public int AuthorRating { get; set; }
-        public int AuthorId { get; set; }
-        public string AutherImage { get; set; }
-        public string Created { get; set; }
+        public string AuthorId { get; set; }
+        public string AuthorImage { get; set; }
+        public string ReplyCreated { get; set; }
 
         public string ReplyContent { get; set; }
 

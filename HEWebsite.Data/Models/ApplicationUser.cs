@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HEWebsite.Data.Models
 {
-    public class ApplicationUser : IdentityUser<int>
+    public class ApplicationUser : IdentityUser<string>
     {
         [PersonalData]
         [Column(TypeName = "nvarchar(100)")]

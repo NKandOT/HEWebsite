@@ -6,15 +6,15 @@ namespace HEWebsite.Data.Interface
 {
     public interface IPost
     {
-        Post GetById(int Id);
-        IEnumerable<Post> GetAll();
-        IEnumerable<Post> GetFilteredPosts(string searchQuery);
-        IEnumerable<Post> GetPostsByForum(int id);
+        public Post GetById(int Id);
+        public IEnumerable<Post> GetAll();
+        public IEnumerable<Post> GetFilteredPosts(string searchQuery);
+        public IEnumerable<Post> GetPostsByForum(int id);
 
-        Task Add(Post post);
-        Task Delete(int Id);
-        Task EditPostContent(int Id, string newContent);
-        Task AddReply(PostReply reply);
+        public Task Add(Post post);
+        public Task Delete(int Id);
+        public Task EditPostContent(int Id, string newContent);
+        public Task AddReply(PostReply reply);
         
     }
 }

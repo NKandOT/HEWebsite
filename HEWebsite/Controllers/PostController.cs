@@ -2,19 +2,26 @@
 using HEWebsite.Data.Models;
 using HEWebsite.Models.Post;
 using HEWebsite.Models.Reply;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HEWebsite.Controllers
 {
     public class PostController : Controller
     {
         private readonly IPost _postService;
-        
-        public PostController(IPost postService)
+        private readonly IForum _forumService;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public PostController(IPost postService, IForum forumService, UserManager<ApplicationUser> userManager)
         {
             _postService = postService;
+            _forumService = forumService;
+            _userManager = userManager;
         }
 
         public IActionResult Index(int id)
@@ -40,6 +47,45 @@ namespace HEWebsite.Controllers
             return View(model);
         }
 
+        public IActionResult Create(int id)
+        {
+            var forum = _forumService.GetById(id);
+
+            var model = new NewPostModel
+            {
+                ForumId = forum.Id,
+                ForumTitle = forum.Title,
+                AuthorName = User.Identity.Name,
+                ForumImage = forum.ForumImage
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPost(NewPostModel model)
+        {
+            var userId = _userManager.GetUserId(User);
+            var user = await _userManager.FindByIdAsync(userId);
+            
+            var post = BuildPostReplies(model, user);
+
+            await _postService.Add(post);
+
+            return RedirectToAction("Index", "Post", post.Id);
+        }
+
+        private Post BuildPostReplies(NewPostModel model, ApplicationUser user)
+        {
+            return new Post
+            {
+                Title = model.PostTitle,
+                Content = model.PostContent,
+                Created = DateTime.Now.ToString(),
+                User = user
+            };
+        }
+
         private IEnumerable<PostReplyModel> BuildPostReplies(IEnumerable<PostReply> replies)
         {
             return replies.Select(reply => new PostReplyModel
@@ -47,9 +93,9 @@ namespace HEWebsite.Controllers
                 Id = reply.Id,
                 AuthorName = reply.User.UserName,
                 AuthorId=reply.User.Id,
-                AutherImage = reply.User.UserImage,
+                AuthorImage = reply.User.UserImage,
                 AuthorRating=reply.User.Rating,
-                DatePosted = reply.DatePosted,
+                ReplyCreated = reply.Created,
                 ReplyContent = reply.Content
             });
         }
