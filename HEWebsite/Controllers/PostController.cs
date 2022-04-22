@@ -72,17 +72,20 @@ namespace HEWebsite.Controllers
 
             await _postService.Add(post);
 
-            return RedirectToAction("Index", "Post", post.Id);
+            return RedirectToAction("Index", "Post", new {id = post.Id });
         }
 
         private Post BuildPostReplies(NewPostModel model, ApplicationUser user)
         {
+            var forum = _forumService.GetById(model.ForumId);
+            
             return new Post
             {
                 Title = model.PostTitle,
                 Content = model.PostContent,
                 Created = DateTime.Now.ToString(),
-                User = user
+                User = user,
+                Forum = forum
             };
         }
 
