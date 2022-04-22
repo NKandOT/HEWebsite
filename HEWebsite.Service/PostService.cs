@@ -41,7 +41,11 @@ namespace HEWebsite.Service
 
         IEnumerable<Post> IPost.GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Posts
+            .Include(post => post.User)
+            .Include(post => post.Replies)
+                .ThenInclude(replies => replies.User)
+            .Include(post => post.Forum);
         }
 
         public Post GetById(int id)
@@ -62,6 +66,16 @@ namespace HEWebsite.Service
         IEnumerable<Post> IPost.GetPostsByForum(int id)
         {
             return _context.Forums.Where(forum => forum.Id == id).First().Posts;
+        }
+
+        IEnumerable<Post> IPost.GetLatestPosts(int nPosts)
+        {
+            return GetAll().OrderByDescending(Post => Post.Created).Take(nPosts);
+        }
+
+        public IEnumerable<Post> GetAll()
+        {
+            return _context.Posts.Include(posts => posts.Forum);
         }
     }
 }

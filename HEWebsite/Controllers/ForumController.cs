@@ -74,8 +74,7 @@ namespace HEWebsite.Controllers
             {
                 Id = forum.Id,
                 Title = forum.Title,
-                Description = forum.Description,
-                ForumImage = forum.ForumImage,
+                ForumImage = forum.ForumImage
             };
         }
     }
