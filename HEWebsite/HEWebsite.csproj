@@ -22,4 +22,9 @@
     <ProjectReference Include="..\HEWebsite.Service\HEWebsite.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\forum\" />
+    <Folder Include="wwwroot\images\theme\" />
+  </ItemGroup>
+
 </Project>

@@ -15,6 +15,11 @@ namespace HEWebsite.Models.Post
         public string Created { get; set; }
         public string PostContent { get; set; }
         
+        public int ForumId { get; set; }
+        public string ForumTitle { get; set; }
+        
         public IEnumerable<PostReplyModel> Replies { get; set; }
+
+        public bool IsAuthorAdmin { get; set; }
     }
 }

@@ -10,6 +10,10 @@
     <title>@ViewData["Title"] - HEWebsite</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -42,22 +46,6 @@
                             </li>
                         }
                     </ul>
-                    @if (!_signInManager.IsSignedIn(User))
-                    {
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-                            <li class="active"><a asp-controller="Account" asp-action="Register">Register</a></li>
-                        </ul>
-                    }
-                    @if (!_signInManager.IsSignedIn(User))
-                    {
-                        <form asp-controller="Account" asp-action="Logout" method="post" class="navbar-right">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>Hello, @_userManager.GetUserName(User)</li>
-                                <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
-                            </ul>
-                        </form>
-                    }
                     <partial name="_LoginPartial" />
                 </div>
             </div>
