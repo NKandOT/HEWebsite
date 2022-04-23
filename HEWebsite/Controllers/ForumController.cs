@@ -3,6 +3,7 @@ using HEWebsite.Data.Models;
 using HEWebsite.Models.Forum;
 using HEWebsite.Models.Post;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace HEWebsite.Controllers
@@ -35,12 +36,12 @@ namespace HEWebsite.Controllers
             return View(model);
         }
 
-        public IActionResult Topic(int Id)
+        public IActionResult Topic(int Id, string searchQuery)
         {
             var forum = _forumService.GetById(Id);
-            var post = _postService.GetPostsByForum(Id);
+            var posts = _postService.GetFilteredPosts(forum, searchQuery).ToList();
 
-            var postListing = post.Select(post => new PostListingModel
+            var postListing = posts.Select(post => new PostListingModel
             {
                 Id = post.Id,
                 AuthorId = post.User.Id,
@@ -59,6 +60,12 @@ namespace HEWebsite.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Search(int id, string searchQuery)
+        {
+            return RedirectToAction("Topic", new { id, searchQuery });
         }
 
         private ForumListingModel BuildForumListing(Post post)

@@ -58,9 +58,13 @@ namespace HEWebsite.Service
             .First();
         }
 
-        public IEnumerable<Post> GetFilteredPosts(string searchQuery)
+        public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
         {
-            throw new NotImplementedException();
+            return string.IsNullOrEmpty(searchQuery)
+                ? forum.Posts
+                : forum.Posts
+                    .Where(p => p.Title.Contains(searchQuery)
+                    || p.Content.Contains(searchQuery));
         }
 
         IEnumerable<Post> IPost.GetPostsByForum(int id)
