@@ -9,6 +9,7 @@ namespace HEWebsite.Data.Interface
         public Post GetById(int Id);
         public IEnumerable<Post> GetAll();
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery);
+        public IEnumerable<Post> GetFilteredPosts(string searchQuery);
         public IEnumerable<Post> GetPostsByForum(int id);
         public IEnumerable<Post> GetLatestPosts(int nPosts);
 

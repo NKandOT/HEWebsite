@@ -81,5 +81,11 @@ namespace HEWebsite.Service
         {
             return _context.Posts.Include(posts => posts.Forum);
         }
+
+        IEnumerable<Post> IPost.GetFilteredPosts(string searchQuery)
+        {
+            return GetAll().Where(p => p.Title.Contains(searchQuery)
+                    || p.Content.Contains(searchQuery));
+        }
     }
 }
