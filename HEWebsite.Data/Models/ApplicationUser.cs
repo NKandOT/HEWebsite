@@ -5,11 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HEWebsite.Data.Models
 {
     public class ApplicationUser : IdentityUser<string>
-    {
-        [PersonalData]
-        [Column(TypeName = "nvarchar(100)")]
+    {        
         public string DisplayName { get; set; }
-        
         public int Rating { get; set; }
         public DateTime MemberSince { get; set; }
         public bool IsActive { get; set; }

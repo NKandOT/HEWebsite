@@ -53,6 +53,17 @@ namespace HEWebsite.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
+            [EmailAddress]
+            [Display(Name = "Confirm Email")]
+            [Compare("Email", ErrorMessage = "The Email and confirmation Email do not match.")]
+            public string UserName { get; set; }
+
+            [Required]
+            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+            [Display(Name = "Display Name")]
+            public string DisplayName { get; set; }
+
+            [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -76,7 +87,14 @@ namespace HEWebsite.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, Id =  IdBuilder()};
+                var user = new ApplicationUser
+                {
+                    DisplayName = Input.DisplayName,
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    Id = IdBuilder(),
+                    MemberSince = DateTime.Now
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -115,11 +133,19 @@ namespace HEWebsite.Areas.Identity.Pages.Account
 
         private string IdBuilder()
         {
-            ModelBuilder modelBuilder = new ModelBuilder();
-            Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder<string> returnValue = modelBuilder.Entity<ApplicationUser>()
-                .Property(u => u.Id)
-                .ValueGeneratedOnAdd();
-            return returnValue.ToString();
+            Random random = new Random();
+            int stringleng = 36;
+            int randvalue;
+            string id = "";
+            char letter;
+
+            for (int i = 0; i < stringleng; i++)
+            {
+                randvalue = random.Next(0, 26);
+                letter = Convert.ToChar(randvalue + 65);
+                id += letter;
+            }
+            return id;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace HEWebsite.Controllers
     {
         private readonly IPost _postservice;
 
-        protected SearchController(IPost postservice)
+        public SearchController(IPost postservice)
         {
             _postservice = postservice;
         }
