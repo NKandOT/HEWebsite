@@ -26,11 +26,10 @@ namespace HEWebsite.Controllers
             _uploadService = uploadService;
         }
 
-        public async Task<IActionResult> DetailAsync(string id)
-        {
+        public async Task<IActionResult> DetailAsync(string id) {
+            
             var user = _userService.GetById(id);
             var userRoles = await _userManager.GetRolesAsync(user);
-
 
             var model = new ProfileModel
             {
@@ -54,12 +53,13 @@ namespace HEWebsite.Controllers
             if (UploadFile(file))
             {
                 var fileName = Path.GetFileName(file.FileName);
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\profiles", fileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                var filePathUpload = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\profiles", fileName);
+                var filePathDb = @$"/images/profiles/{fileName}";
+                using (var fileStream = new FileStream(filePathUpload, FileMode.Create))
                 {
                     await file.CopyToAsync(fileStream);
                 }
-                await _userService.SetProfileImage(userId, filePath);
+                await _userService.SetProfileImage(userId, filePathDb);
             }
             return RedirectToAction("Detail", "Profile", new { id = userId });
         }

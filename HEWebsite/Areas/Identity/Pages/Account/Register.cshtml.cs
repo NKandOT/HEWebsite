@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -93,7 +94,8 @@ namespace HEWebsite.Areas.Identity.Pages.Account
                     UserName = Input.Email,
                     Email = Input.Email,
                     Id = IdBuilder(),
-                    MemberSince = DateTime.Now
+                    MemberSince = DateTime.Now,
+                    UserImage = @"/images/profiles/defualtProfileImage.jpg"
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
