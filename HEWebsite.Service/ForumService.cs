@@ -18,17 +18,14 @@ namespace HEWebsite.Service
             _context = context;
         }
 
-        public async Task Create(Forum forum)
+        public Task Create(Forum forum)
         {
-            _context.Add(forum);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task Delete(int forumId)
+        public Task Delete(int forumId)
         {
-            var forum = GetById(forumId);
-            _context.Remove(forum);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Forum> GetAll()
