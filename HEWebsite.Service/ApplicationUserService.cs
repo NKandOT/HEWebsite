@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HEWebsite.Service
 {
-    class ApplicationUserService : IApplicationUser
+    public class ApplicationUserService : IApplicationUser
     {
         private readonly ApplicationDbContext _context;
 
@@ -34,10 +34,10 @@ namespace HEWebsite.Service
             throw new NotImplementedException();
         }
 
-        public async Task SetProfileImage(string id, Uri uri)
+        public async Task SetProfileImage(string id, string filePath)
         {
             var user = GetById(id);
-            user.UserImage = uri.AbsoluteUri;
+            user.UserImage = filePath;
             _context.Update(user);
             await _context.SaveChangesAsync();
         }

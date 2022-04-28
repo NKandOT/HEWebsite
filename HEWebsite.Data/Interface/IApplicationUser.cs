@@ -13,7 +13,7 @@ namespace HEWebsite.Data.Interface
         ApplicationUser GetById(string id);
         IEnumerable<ApplicationUser> GetAll();
         
-        Task SetProfileImage(string id, Uri uri);
+        Task SetProfileImage(string id, string filePath);
         Task IncramentRating(string id, Type type);
 
 

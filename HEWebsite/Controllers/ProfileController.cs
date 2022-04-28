@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HEWebsite.Models.ApplicationUser;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace HEWebsite.Controllers
 {
@@ -24,10 +26,10 @@ namespace HEWebsite.Controllers
             _uploadService = uploadService;
         }
 
-        public IActionResult Detail(string id)
+        public async Task<IActionResult> DetailAsync(string id)
         {
             var user = _userService.GetById(id);
-            var userRoles = _userManager.GetRolesAsync(user).Result;
+            var userRoles = await _userManager.GetRolesAsync(user);
 
 
             var model = new ProfileModel
@@ -42,7 +44,33 @@ namespace HEWebsite.Controllers
                 IsAdmin = userRoles.Contains("Admin")
             };
             
-            return View();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadProfileImage (IFormFile file)
+        {
+            var userId = _userManager.GetUserId(User);
+            if (UploadFile(file))
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\profiles", fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+                await _userService.SetProfileImage(userId, filePath);
+            }
+            return RedirectToAction("Detail", "Profile", new { id = userId });
+        }
+
+        private bool UploadFile(IFormFile ufile)
+        {
+            if (ufile != null && ufile.Length > 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -38,7 +38,9 @@ namespace HEWebsite
             services.AddControllersWithViews();
             services.AddScoped<IForum, ForumService>();
             services.AddScoped<IPost, PostService>();
-            services.AddTransient<DataSeeder>();
+            services.AddScoped<IApplicationUser, ApplicationUserService>();
+            services.AddScoped<IUpload, UploadService>();
+            services.AddTransient<DataSeeder>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
