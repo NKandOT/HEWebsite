@@ -60,5 +60,13 @@ namespace HEWebsite.Service
         {
             throw new NotImplementedException();
         }
+
+        public async Task UpdateForumImage(int forumId, string filePath)
+        {
+            var forum = GetById(forumId);
+            forum.ForumImage = filePath;
+            _context.Update(forum);
+            await _context.SaveChangesAsync();
+        }
     }
 }

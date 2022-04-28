@@ -2,9 +2,13 @@
 using HEWebsite.Data.Models;
 using HEWebsite.Models.Forum;
 using HEWebsite.Models.Post;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HEWebsite.Controllers
 {
@@ -66,6 +70,50 @@ namespace HEWebsite.Controllers
         public IActionResult Search(int id, string searchQuery)
         {
             return RedirectToAction("Topic", new { id, searchQuery });
+        }
+
+        public IActionResult Create()
+        {
+            var model = new AddForumModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddForum(AddForumModel model)
+        {
+            var filePathDb = @$"/images/forum/defaultForumImage.png";
+
+            if (UploadFile(model.ImageUpload))
+            {
+                var fileName = Path.GetFileName(model.ImageUpload.FileName);
+                var filePathUpload = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images\forum", fileName);
+                filePathDb = @$"/images/forum/{fileName}";
+                using (var fileStream = new FileStream(filePathUpload, FileMode.Create))
+                {
+                    await model.ImageUpload.CopyToAsync(fileStream);
+                }
+            }
+
+            var forum = new Forum 
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Created = DateTime.UtcNow,
+                ForumImage = filePathDb
+            };
+
+            await _forumService.Create(forum);
+
+            return RedirectToAction("Index", "Forum");
+        }
+
+        private bool UploadFile(IFormFile ufile)
+        {
+            if (ufile != null && ufile.Length > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         private ForumListingModel BuildForumListing(Post post)
