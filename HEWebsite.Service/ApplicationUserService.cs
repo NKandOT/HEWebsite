@@ -29,28 +29,9 @@ namespace HEWebsite.Service
                 u => u.Id == id);
         }
 
-        public async Task UpdateUserRating(string userId, Type type)
+        public Task IncramentRating(string id, Type type)
         {
-            var user = GetById(userId);
-            var newRating = CalculateUserRating(type, user.Rating);
-            user.Rating = newRating;
-            await _context.SaveChangesAsync();
-        }
-
-        private int CalculateUserRating(Type type, int rating)
-        {
-            var inc = 0;
-
-            if (type == typeof(Post))
-            {
-                inc = 1;
-            }
-            if (type == typeof(PostReply))
-            {
-                inc = 3;
-            }
-
-            return rating + inc;
+            throw new NotImplementedException();
         }
 
         public async Task SetProfileImage(string id, string filePath)

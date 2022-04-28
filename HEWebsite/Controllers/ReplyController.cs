@@ -14,13 +14,11 @@ namespace HEWebsite.Controllers
     {
         private readonly IPost _postService;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IApplicationUser _userService;
 
-        public ReplyController(IPost postService, UserManager<ApplicationUser> userManager, IApplicationUser userService)
+        public ReplyController(IPost postService, UserManager<ApplicationUser> userManager)
         {
             _postService = postService;
             _userManager = userManager;
-            _userService = userService;
         }
 
         public async Task<IActionResult> CreateAsync(int id)
@@ -30,6 +28,7 @@ namespace HEWebsite.Controllers
 
             var model = new PostReplyModel
             {
+                //Id = ,
                 AuthorName = user.DisplayName,
                 AuthorRating = user.Rating,
                 AuthorId = user.Id,
@@ -57,9 +56,8 @@ namespace HEWebsite.Controllers
 
             var reply = BuildReply(model, user);
 
-            await _postService.AddReply(reply); await _userService.UpdateUserRating(userId, typeof(PostReply));
-
-
+            await _postService.AddReply(reply);
+            
             return RedirectToAction("Index", "Post", new { id = model.PostId });
         }
 

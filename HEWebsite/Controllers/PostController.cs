@@ -16,14 +16,12 @@ namespace HEWebsite.Controllers
         private readonly IPost _postService;
         private readonly IForum _forumService;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IApplicationUser _userService;
 
-        public PostController(IPost postService, IForum forumService, UserManager<ApplicationUser> userManager, IApplicationUser userService)
+        public PostController(IPost postService, IForum forumService, UserManager<ApplicationUser> userManager)
         {
             _postService = postService;
             _forumService = forumService;
             _userManager = userManager;
-            _userService = userService;
         }
 
         public IActionResult Index(int id)
@@ -75,7 +73,6 @@ namespace HEWebsite.Controllers
             var post = BuildPostReplies(model, user);
 
             await _postService.Add(post);
-            await _userService.UpdateUserRating(userId, typeof(Post));
 
             return RedirectToAction("Index", "Post", new {id = post.Id });
         }

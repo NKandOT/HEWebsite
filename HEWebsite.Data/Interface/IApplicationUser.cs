@@ -14,7 +14,7 @@ namespace HEWebsite.Data.Interface
         IEnumerable<ApplicationUser> GetAll();
         
         Task SetProfileImage(string id, string filePath);
-        Task UpdateUserRating(string userId, Type type);
+        Task IncramentRating(string id, Type type);
 
 
     }
