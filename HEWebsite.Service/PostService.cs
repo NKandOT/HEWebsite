@@ -30,19 +30,14 @@ namespace HEWebsite.Service
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(int Id)
+        public Task Delete(int Id)
         {
-            var post = GetById(Id);
-            _context.Remove(post);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task EditPostContent(int Id, string newContent)
+        public Task EditPostContent(int Id, string newContent)
         {
-            var post = GetById(Id);
-            post.Content = newContent;
-            _context.Update(post);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         IEnumerable<Post> IPost.GetAll()
