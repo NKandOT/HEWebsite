@@ -35,7 +35,7 @@ namespace HEWebsite.Service
 
         public IEnumerable<ApplicationUser> GetAllActiveUsers()
         {
-            throw new NotImplementedException();
+            return _context.Users.Where(u => u.IsActive == true);
         }
 
         public Forum GetById(int Id)
@@ -51,14 +51,20 @@ namespace HEWebsite.Service
             return forum;
         }
 
-        public Task UpdateForumDescription(int forumId, string newDescription)
+        public async Task UpdateForumDescription(int forumId, string newDescription)
         {
-            throw new NotImplementedException();
+            var forum = GetById(forumId);
+            forum.Description = newDescription;
+            _context.Update(forum);
+            await _context.SaveChangesAsync();
         }
 
-        public Task UpdateForumTitle(int forumId, string newTitle)
+        public async Task UpdateForumTitle(int forumId, string newTitle)
         {
-            throw new NotImplementedException();
+            var forum = GetById(forumId);
+            forum.Title = newTitle;
+            _context.Update(forum);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateForumImage(int forumId, string filePath)
