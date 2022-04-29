@@ -10,6 +10,7 @@ namespace HEWebsite.Models.Course
         public int DepartmentId { get; set; }
         public string DepartmentTitle { get; set; }
         public string DepartmentImage { get; set; }
+        public string CourseTitle { get; set; }
         public string CourseContent { get; set; }
         public string EntryRequirements { get; set; }
 
