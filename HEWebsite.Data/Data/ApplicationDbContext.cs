@@ -17,6 +17,9 @@ namespace HEWebsite.Data
         public DbSet<Forum> Forums { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostReply> PostReplies { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Tutor> Tutors { get; set; }
 
     }
 }
