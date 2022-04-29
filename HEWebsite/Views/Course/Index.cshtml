@@ -1,0 +1,28 @@
+﻿@model HEWebsite.Models.Course.CourseIndexModel
+
+<div class="container body-content">
+    <div class="row postHeader">
+        <div class="postHeader">
+            <span class="postIndexTitle">
+                @Model.Title
+            </span>
+            <span id="headingBtn"><a asp-controller="Department" asp-action="Topic" asp-route-id="@Model.DepartmentId" btn btn-back>Back to @Model.DepartmentTitle</a></span>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="postIndexContent">
+    <div class="col-md-9 postContentContainer">
+        <div class="postContent">
+            @Html.Raw(Model.Content)
+        </div>
+    </div>
+    <div class="row" id="replyDivider"></div>    
+    <div class="row replyContent"
+        <div class="col-md-9 replyContentContainer">
+            <div class="postContent">
+                @Html.Raw(Model.Requirements)
+            </div>
+        </div>
+    </div>
+</div>

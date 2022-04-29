@@ -1,0 +1,73 @@
+﻿@model HEWebsite.Models.Department.DepartmentTopicModel
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            <span>@Model.Department.Title Department</span>
+            @if (Context.User.IsInRole("Admin"))
+            {
+                <span id="headingBtn">
+                    <a asp-controller="Course" asp-action="Create" asp-route-id="@Model.Department.Id" class="btn btn-newPost">
+                        Create Course
+                    </a>
+                </span>
+            }
+            <form asp-controller="Department" asp-action="Search" method="post">
+                <div class="searchForm">
+                    <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)" />
+                    <button type="submit" class="btn btnForumSearch">
+                        <i class="material-icons">search</i>
+                    </button>
+                </div>
+                <input asp-for="Department.Id" name="id" type="hidden" />
+            </form>
+        </div>
+        <div class="sectionDescription">
+            <div class="forumLogo" style="background-image:url(@Model.Department.DepartmentImage)"></div>
+            <p>Welcome to the @Model.Department.Title Department, we hope you find the course for you.</p>
+        </div>
+    </div>
+    <div class="row forumIndexContent">
+        @if (Model.Courses.Any())
+        {
+            <table class="table table-hover table-bordered" id="forumIndexTable">
+                <tbody>
+                    @foreach(var course in Model.Courses)
+                    {
+                    <tr>
+                        <td>
+                            <div class="postData">
+                                <div class="postTitle">
+                                    <a asp-controller="Course" asp-action="Index" asp-route-id="@course.Id">@course.Title</a>
+                                </div>
+                                <div class="forumSubTitle">
+                                    <td>
+                                        <div class="postDate">@course.DatePosted</div>
+                                    </td>
+                                </div>
+                            </div>
+                        </td>
+                            
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="noPosts">
+                <i class="material-icons md-72">question_answer</i>
+                <h3>
+                    It looks like this department is still being organised, please check back later.
+                </h3>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts{ 
+    <script>
+        function clearThis(target) {
+            target.value = "";
+        }
+    </script>
+}

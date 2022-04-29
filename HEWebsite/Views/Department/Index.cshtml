@@ -1,0 +1,21 @@
+﻿@model HEWebsite.Models.Department.DepartmentIndexModel
+
+<h1>Departments</h1>
+
+<table class="table table-hover" id="forumIndexTabel">
+    <tbody>
+        @foreach (var department in Model.DepartmentList)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Department" asp-action="Topic" asp-route-Id="@department.Id">
+                        @department.Title
+                    </a>
+                </td>
+                <td>
+                    @department.Description
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

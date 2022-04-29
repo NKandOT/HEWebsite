@@ -10,5 +10,6 @@ namespace HEWebsite.Models.Department
     {
         public DepartmentListingModel Department { get; set; }
         public IEnumerable<CourseListingModel> Courses { get; set; }
+        public string SearchQuery { get; set; }
     }
 }

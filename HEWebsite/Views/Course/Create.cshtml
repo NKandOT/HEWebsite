@@ -1,0 +1,36 @@
+﻿@model HEWebsite.Models.Course.NewCourseModel
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading noBorder">
+            New Course | @Model.DepartmentTitle
+            <div class="forumLogo" style="background-image: url(@Model.DepartmentImage); background-size:100%"></div>
+        </div>
+    </div>
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <div class="createPostSection">
+                <form asp-action="AddCourse" method="post" id="addPostForm">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="CourseTitle">Course Title</label>
+                        <input asp-for="CourseTitle" class="form-control" />
+                        <span asp-validation-for="CourseTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CourseContent">Course Content</label>
+                        <textarea asp-for="CourseContent" rows="20" class="form-control" placeholder="Description of the course."></textarea>
+                        <span asp-validation-for="CourseContent" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EntryRequirements">Course Requirements</label>
+                        <textarea asp-for="EntryRequirements" rows="20" class="form-control" placeholder="Course Requirements."></textarea>
+                        <span asp-validation-for="EntryRequirements" class="text-danger"></span>
+                    </div>
+                    <button type="submit" id="registerBtn" class="btn btn-submitPost">Submit Course</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>

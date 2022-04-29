@@ -11,10 +11,11 @@ namespace HEWebsite.Models.Course
         public string Title { get; set; }
         public string Created { get; set; }
         public string Content { get; set; }
-        
+        public string Requirements { get; set; }
+
         public int DepartmentId { get; set; }
         public string DepartmentTitle { get; set; }
         
-        public IEnumerable<Tutor> Tutors { get; set; }
+        //public IEnumerable<Tutor> Tutors { get; set; }
     }
 }

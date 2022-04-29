@@ -32,7 +32,7 @@ namespace HEWebsite.Controllers
                 Content = course.Content,
                 DepartmentId = course.Department.Id,
                 DepartmentTitle = course.Department.Title,
-                Tutors = course.Tutors
+                //Tutors = course.Tutors
             };
 
             return View(model);
