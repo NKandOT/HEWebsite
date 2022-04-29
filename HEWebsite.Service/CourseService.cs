@@ -18,14 +18,17 @@ namespace HEWebsite.Service
             _context = context;
         }
 
-        public Task Add(Course Course)
+        public async Task Add(Course course)
         {
-            throw new NotImplementedException();
+            _context.Add(course);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Delete(int Id)
+        public async Task Delete(int Id)
         {
-            throw new NotImplementedException();
+            var course = GetById(Id);
+            _context.Remove(course);
+            await _context.SaveChangesAsync();
         }
 
         public Task EditCourseContent(int Id, string newContent)
@@ -58,7 +61,7 @@ namespace HEWebsite.Service
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Course> GetFilteredCourse(Department Department, string searchQuery)
+        public IEnumerable<Course> GetFilteredCourse(Department department, string searchQuery)
         {
             throw new NotImplementedException();
         }

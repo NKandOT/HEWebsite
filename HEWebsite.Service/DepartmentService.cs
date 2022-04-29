@@ -27,7 +27,8 @@ namespace HEWebsite.Service
 
         public async Task Delete(int departmentId)
         {
-            _context.Remove(departmentId);
+            var department = GetById(departmentId);
+            _context.Remove(department);
             await _context.SaveChangesAsync();
         }
 
