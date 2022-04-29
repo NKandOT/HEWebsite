@@ -39,7 +39,9 @@ namespace HEWebsite
             services.AddScoped<IForum, ForumService>();
             services.AddScoped<IPost, PostService>();
             services.AddScoped<IApplicationUser, ApplicationUserService>();
-            services.AddTransient<DataSeeder>();            
+            services.AddTransient<DataSeeder>();
+            services.AddScoped<IDepartment, DepartmentService>();
+            services.AddScoped<ICourse, CourseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

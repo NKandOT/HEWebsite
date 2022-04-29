@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HEWebsite.Service
 {
-    class CourseService :ICourse
+    public class CourseService :ICourse
     {
         private readonly ApplicationDbContext _context;
 
@@ -63,6 +63,21 @@ namespace HEWebsite.Service
         public Course GetById(int Id)
         {
             return _context.Courses.Where(c => c.Id == Id).FirstOrDefault();
+        }
+
+        IEnumerable<Course> ICourse.GetFilteredCourses(Department department, string searchQuery)
+        {
+            return string.IsNullOrEmpty(searchQuery)
+                ? department.Courses
+                : department.Courses
+                    .Where(c => c.Title.Contains(searchQuery)
+                    || c.Content.Contains(searchQuery));
+        }
+
+        IEnumerable<Course> ICourse.GetFilteredCourses(string searchQuery)
+        {
+            return GetAll().Where(c => c.Title.Contains(searchQuery)
+                    || c.Content.Contains(searchQuery));
         }
     }
 }
