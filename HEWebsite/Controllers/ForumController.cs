@@ -81,7 +81,7 @@ namespace HEWebsite.Controllers
         [HttpPost]
         public async Task<IActionResult> AddForum(AddForumModel model)
         {
-            var filePathDb = @$"/images/forum/defaultForumImage.png";
+            var filePathDb = @$"/Images/Forum/defaultForumImage.png";
 
             if (UploadFile(model.ImageUpload))
             {
