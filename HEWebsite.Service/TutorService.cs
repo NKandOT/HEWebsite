@@ -1,5 +1,6 @@
 ﻿using HEWebsite.Data;
 using HEWebsite.Data.Interface;
+using HEWebsite.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,24 +18,38 @@ namespace HEWebsite.Service
             _context = context;
         }
 
-        public Task AddTutor(string email, string name)
+        public async Task AddTutor(Tutor tutor)
         {
-            throw new NotImplementedException();
+            _context.Add(tutor);
+            await _context.SaveChangesAsync();
         }
 
-        public Task AddTutor(int id)
+        public async Task DeleteTutor(int id)
         {
-            throw new NotImplementedException();
+            var tutor = GetById(id);
+            _context.Remove(tutor);
+            await _context.SaveChangesAsync();
         }
 
-        public Task EditTutorEmail(int id, string email)
+        public async Task EditTutorEmail(int id, string email)
         {
-            throw new NotImplementedException();
+            var tutor = GetById(id);
+            tutor.Email = email;
+            _context.Update(tutor);
+            await _context.SaveChangesAsync();
         }
 
-        public Task EditTutorName(int id, string name)
+        public async Task EditTutorName(int id, string name)
         {
-            throw new NotImplementedException();
+            var tutor = GetById(id);
+            tutor.Name = name;
+            _context.Update(tutor);
+            await _context.SaveChangesAsync();
+        }
+
+        public Tutor GetById(int Id)
+        {
+            return _context.Tutors.Where(t => t.Id == Id).FirstOrDefault();
         }
     }
 }

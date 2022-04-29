@@ -31,44 +31,38 @@ namespace HEWebsite.Service
             await _context.SaveChangesAsync();
         }
 
-        public Task EditCourseContent(int Id, string newContent)
+        public async Task EditCourseContent(int Id, string newContent)
         {
-            throw new NotImplementedException();
+            var course = GetById(Id);
+            course.Content = newContent;
+            _context.Update(course);
+            await _context.SaveChangesAsync();
         }
 
-        public Task EditCourseEntryRequirements(int Id, string newEntryRequirements)
+        public async Task EditCourseEntryRequirements(int Id, string newEntryRequirements)
         {
-            throw new NotImplementedException();
+            var course = GetById(Id);
+            course.EntryRequirements = newEntryRequirements;
+            _context.Update(course);
+            await _context.SaveChangesAsync();
         }
 
-        public Task EditCourseTitle(int Id, string newTitle)
+        public async Task EditCourseTitle(int Id, string newTitle)
         {
-            throw new NotImplementedException();
+            var course = GetById(Id);
+            course.EntryRequirements = newTitle;
+            _context.Update(course);
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<Course> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Courses;
         }
 
         public Course GetById(int Id)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Course> GetCourseByDepartment(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Course> GetFilteredCourse(Department department, string searchQuery)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Course> GetFilteredCourse(string searchQuery)
-        {
-            throw new NotImplementedException();
+            return _context.Courses.Where(c => c.Id == Id).FirstOrDefault();
         }
     }
 }

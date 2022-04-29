@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HEWebsite.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,10 @@ namespace HEWebsite.Data.Interface
 {
     public interface ITutor
     {
-        public Task AddTutor(string email, string name);
+        public Task AddTutor(Tutor tutor);
         public Task EditTutorName(int id, string name);
         public Task EditTutorEmail(int id, string email);
-        public Task AddTutor(int id);
+        public Task DeleteTutor(int id);
+        public Tutor GetById(int Id);
     }
 }

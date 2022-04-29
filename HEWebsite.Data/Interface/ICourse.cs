@@ -11,9 +11,6 @@ namespace HEWebsite.Data.Interface
     {
         public Course GetById(int Id);
         public IEnumerable<Course> GetAll();
-        public IEnumerable<Course> GetFilteredCourse(Department Department, string searchQuery);
-        public IEnumerable<Course> GetFilteredCourse(string searchQuery);
-        public IEnumerable<Course> GetCourseByDepartment(int id);
 
         public Task Add(Course Course);
         public Task Delete(int Id);
