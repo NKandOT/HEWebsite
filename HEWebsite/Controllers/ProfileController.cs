@@ -61,6 +61,27 @@ namespace HEWebsite.Controllers
             return RedirectToAction("Detail", "Profile", new { id = userId });
         }
 
+        public IActionResult Index()
+        {
+            var profiles = _userService.GetAll()
+                .OrderByDescending(u => u.Rating)
+                .Select(u => new ProfileModel
+                {
+                    Email = u.Email,
+                    DisplayName = u.DisplayName,
+                    ProfileImage = u.UserImage,
+                    UserRating = u.Rating,
+                    MemberSince = u.MemberSince
+                });
+
+            var model = new ProfileListModel
+            {
+                Profiles = profiles
+            };
+
+            return View(model);
+        }
+
         private bool UploadFile(IFormFile ufile)
         {
             if (ufile != null && ufile.Length > 0)

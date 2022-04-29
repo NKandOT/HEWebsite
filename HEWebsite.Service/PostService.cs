@@ -78,9 +78,10 @@ namespace HEWebsite.Service
             return _context.Forums.Where(forum => forum.Id == id).First().Posts;
         }
 
-        IEnumerable<Post> IPost.GetLatestPosts(int nPosts)
+        public IEnumerable<Post> GetLatestPosts(int count)
         {
-            return GetAll().OrderByDescending(Post => Post.Created).Take(nPosts);
+            var allPosts = GetAll().OrderByDescending(post => post.Created);
+            return allPosts.Take(count);
         }
 
         public IEnumerable<Post> GetAll()

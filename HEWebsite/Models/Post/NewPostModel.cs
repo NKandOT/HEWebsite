@@ -10,6 +10,7 @@ namespace HEWebsite.Models.Post
         public int ForumId { get; set; }
         public string ForumTitle { get; set; }
         public string AuthorName { get; set; }
+        public string AuthorId { get; set; }
         public string ForumImage { get; set; }
         public string PostTitle { get; set; }
         public string PostContent { get; set; }

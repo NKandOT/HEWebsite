@@ -29,6 +29,12 @@ namespace HEWebsite.Service
                 u => u.Id == id);
         }
 
+        public ApplicationUser GetByName(string name)
+        {
+            return GetAll().FirstOrDefault(
+                u => u.Email == name);
+        }
+
         public Task IncramentRating(string id, Type type)
         {
             throw new NotImplementedException();

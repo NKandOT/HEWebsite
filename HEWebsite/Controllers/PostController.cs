@@ -16,12 +16,14 @@ namespace HEWebsite.Controllers
         private readonly IPost _postService;
         private readonly IForum _forumService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IApplicationUser _userService;
 
-        public PostController(IPost postService, IForum forumService, UserManager<ApplicationUser> userManager)
+        public PostController(IPost postService, IForum forumService, UserManager<ApplicationUser> userManager, IApplicationUser userService)
         {
             _postService = postService;
             _forumService = forumService;
             _userManager = userManager;
+            _userService = userService;
         }
 
         public IActionResult Index(int id)
@@ -52,12 +54,14 @@ namespace HEWebsite.Controllers
         public IActionResult Create(int id)
         {
             var forum = _forumService.GetById(id);
+            var user = _userService.GetByName(User.Identity.Name);
 
             var model = new NewPostModel
             {
                 ForumId = forum.Id,
                 ForumTitle = forum.Title,
-                AuthorName = User.Identity.Name,
+                AuthorName = user.DisplayName,
+                AuthorId = user.Id,
                 ForumImage = forum.ForumImage
             };
 

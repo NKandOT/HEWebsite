@@ -11,6 +11,7 @@ namespace HEWebsite.Data.Interface
     public interface IApplicationUser
     {
         ApplicationUser GetById(string id);
+        ApplicationUser GetByName(string name);
         IEnumerable<ApplicationUser> GetAll();
         
         Task SetProfileImage(string id, string filePath);

@@ -58,11 +58,17 @@ namespace HEWebsite.Controllers
                 RepliesCount = post.Replies.Count(),
                 Forum = GetForumListingForPost(post)
             });
-            return new HomeIndexModel
+
+            return new HomeIndexModel()
             {
-                LatestPosts = posts,
-                SearchQuery = ""
+                LatestPosts = posts
             };
+        }
+
+        [HttpPost]
+        public IActionResult Search(string searchQuery)
+        {
+            return RedirectToAction("Topic", "Forum", new { searchQuery });
         }
 
         private ForumListingModel GetForumListingForPost(Post post)

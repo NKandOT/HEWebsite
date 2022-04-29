@@ -180,6 +180,11 @@
     padding: 8px 0 24px 24px;
 }
 
+#replyDivider{
+    height: 2px;
+    margin-bottom: 12px;
+}
+
 #headingBtn{
     float: right;
     margin-right: 20px;
@@ -341,11 +346,52 @@ btn-file:hover {
     font-size: 1.7em;
 }
 
-/*Post*/
+/*Create Post*/
 .createPostSection {
     background-color: #fff;
     padding: 24px;
 }
+
+/*User Profile Index*/
+
+.userProfilePic {
+    height: 140px;
+    width: 140px;
+    background-size: 100%;
+}
+
+/*Replies*/
+
+.replyContent{
+    display: table;
+    background-color: #fff;
+    border-bottom: 1px solid #aaa;
+    width: inherit;
+}
+
+#postReplyRow{
+    background-color: #3f51b5;
+    padding: 8px;
+}
+
+.replyContentContainer, .replyAuthorContainer{
+    display: table-cell;
+    padding: 12px;
+}
+
+.isAdmin{
+    display: inline-block;
+    padding: 3px;
+    background-color: #ffeb3b;
+    color: #000;
+    font-family: 'Roboto Mono';
+}
+
+.smaller{
+    font-size: 0.8em;
+}
+
+
 
 /*wrapping element*/
 .body-content {

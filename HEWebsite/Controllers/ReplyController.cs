@@ -28,13 +28,12 @@ namespace HEWebsite.Controllers
 
             var model = new PostReplyModel
             {
-                //Id = ,
                 AuthorName = user.DisplayName,
                 AuthorRating = user.Rating,
                 AuthorId = user.Id,
                 AuthorImage = user.UserImage,
                 IsAuthorAdmin = IsAuthorAdmin(user),
-                ReplyCreated = DateTime.UtcNow.ToString(),
+                ReplyCreated = DateTime.Now.ToString(),
 
                 PostId = post.Id,
                 PostTitle = post.Title,
